@@ -43,5 +43,5 @@ def calc_annuity_annualy(darlehenssumme, zinssatz, tilgungssatz):
 calc_annuity_monthly(darlehen_sum, zins_percent, tilgung_percent)
 calc_annuity_annualy(darlehen_sum, zins_percent, tilgung_percent)
 
-#DIES IST EINE AENDERUNG
+
 
