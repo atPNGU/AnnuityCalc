@@ -18,6 +18,8 @@ def calc_annuity_monthly(darlehenssumme, zinssatz, tilgungssatz):
         restschuld = restschuld - rate_tilgung_mtl
         rate_zinsen_mtl = round((restschuld * zinssatz)/12, 2)
         rate_tilgung_mtl = round(rate_gesamt_mtl - rate_zinsen_mtl, 2)
+        if rate_gesamt_mtl != rate_zinsen_mtl + rate_zinsen_mtl:
+            break
         print("m" + str(i) + " Zinsen: " + str(rate_zinsen_mtl) + " Tilgung: " + str(rate_tilgung_mtl))
         i += 1
 
@@ -36,6 +38,8 @@ def calc_annuity_annualy(darlehenssumme, zinssatz, tilgungssatz):
         restschuld = restschuld - rate_tilgung_ann
         rate_zinsen_ann = round((restschuld * zinssatz), 2)
         rate_tilgung_ann = round(rate_gesamt_ann - rate_zinsen_ann, 2)
+        if rate_gesamt_mtl != rate_zinsen_mtl + rate_zinsen_mtl:
+            break
         print("j" + str(i) + " Zinsen: " + str(rate_zinsen_ann) + " Tilgung: " + str(rate_tilgung_ann))
         i += 1
 
