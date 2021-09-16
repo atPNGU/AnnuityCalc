@@ -34,7 +34,7 @@ def calc_annuity_monthly(darlehenssumme, zinssatz, tilgungssatz, monate):
         i += 1
     
     # Export .csv
-    with open('C:/Users/Lukas/Documents/VSC/git/baufi/data.csv', 'w') as f:
+    with open('data.csv', 'w') as f:
         writer = csv.writer(f)
         writer.writerow(fields)
         writer.writerows(rows)
