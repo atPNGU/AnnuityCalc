@@ -1,5 +1,6 @@
 import csv
 
+
 def calc_annuity_monthly_tableau(darlehenssumme, zinssatz, tilgungssatz, monate):
 
     # Listen für return
@@ -13,10 +14,7 @@ def calc_annuity_monthly_tableau(darlehenssumme, zinssatz, tilgungssatz, monate)
             rate_tilgung_mtl = round((darlehenssumme * tilgungssatz)/12, 2)
             rate_zinsen_mtl = round((darlehenssumme * zinssatz)/12, 2)
             rate_gesamt_mtl =  rate_tilgung_mtl + rate_zinsen_mtl
-            rows_1 = []
-            rows_1.append(i)
-            rows_1.append(rate_zinsen_mtl)
-            rows_1.append(rate_tilgung_mtl)
+            rows_1 = [i, rate_zinsen_mtl, rate_tilgung_mtl]
             rows.append(rows_1)
             i += 1
             continue
@@ -27,9 +25,7 @@ def calc_annuity_monthly_tableau(darlehenssumme, zinssatz, tilgungssatz, monate)
         if rate_gesamt_mtl != rate_zinsen_mtl + rate_tilgung_mtl:
             break
         rows_1 = []
-        rows_1.append(i)
-        rows_1.append(rate_zinsen_mtl)
-        rows_1.append(rate_tilgung_mtl)
+        rows_1 = [i, rate_zinsen_mtl, rate_tilgung_mtl]
         rows.append(rows_1)
         i += 1
     
@@ -52,9 +48,7 @@ def calc_annuity_monthly_graph(darlehenssumme, zinssatz, tilgungssatz, monate):
             rate_tilgung_mtl = round((darlehenssumme * tilgungssatz)/12, 2)
             rate_zinsen_mtl = round((darlehenssumme * zinssatz)/12, 2)
             rate_gesamt_mtl =  rate_tilgung_mtl + rate_zinsen_mtl
-            rows_1 = []
-            rows_1.append(rate_zinsen_mtl)
-            rows_1.append(rate_tilgung_mtl)
+            rows_1 = [rate_zinsen_mtl, rate_tilgung_mtl]
             rows.append(rows_1)
             i += 1
             continue
@@ -65,8 +59,7 @@ def calc_annuity_monthly_graph(darlehenssumme, zinssatz, tilgungssatz, monate):
         if rate_gesamt_mtl != rate_zinsen_mtl + rate_tilgung_mtl:
             break
         rows_1 = []
-        rows_1.append(rate_zinsen_mtl)
-        rows_1.append(rate_tilgung_mtl)
+        rows_1 = [rate_zinsen_mtl, rate_tilgung_mtl]
         rows.append(rows_1)
         i += 1
     
