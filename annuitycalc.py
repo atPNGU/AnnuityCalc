@@ -1,31 +1,31 @@
 import csv
 
 
-def calc_annuity_monthly_tableau(darlehenssumme, zinssatz, tilgungssatz, monate):
+def calc_annuity_monthly_tableau(loan_amount, interest, repayment, months):
 
-    # Listen für return
+    # header .csv (ger)
     fields = ["monat", "zinsen", "tilgung"]
     rows = []
 
-    # Ermittlung Restschuld  >> Zinsen auf Restschuld >> neue Tilgung >> ..
+    # calculating loop
     i = 1
-    while i < int(monate) + 1:
+    while i < int(months) + 1:
         if i == 1:
-            rate_tilgung_mtl = round((darlehenssumme * tilgungssatz)/12, 2)
-            rate_zinsen_mtl = round((darlehenssumme * zinssatz)/12, 2)
-            rate_gesamt_mtl =  rate_tilgung_mtl + rate_zinsen_mtl
-            rows_1 = [i, rate_zinsen_mtl, rate_tilgung_mtl]
+            repayment_mtl = round((loan_amount * repayment)/12, 2)
+            interest_mtl = round((loan_amount * interest)/12, 2)
+            total_mtl =  repayment_mtl + interest_mtl
+            rows_1 = [i, interest_mtl, repayment_mtl]
             rows.append(rows_1)
             i += 1
             continue
 
-        darlehenssumme = darlehenssumme - rate_tilgung_mtl
-        rate_zinsen_mtl = round((darlehenssumme * zinssatz)/12, 2)
-        rate_tilgung_mtl = round(rate_gesamt_mtl - rate_zinsen_mtl, 2)
-        if rate_gesamt_mtl != rate_zinsen_mtl + rate_tilgung_mtl:
+        loan_amount = loan_amount - repayment_mtl
+        interest_mtl = round((loan_amount * interest)/12, 2)
+        repayment_mtl = round(total_mtl - interest_mtl, 2)
+        if total_mtl != interest_mtl + repayment_mtl:
             break
         rows_1 = []
-        rows_1 = [i, rate_zinsen_mtl, rate_tilgung_mtl]
+        rows_1 = [i, interest_mtl, repayment_mtl]
         rows.append(rows_1)
         i += 1
     
@@ -35,47 +35,12 @@ def calc_annuity_monthly_tableau(darlehenssumme, zinssatz, tilgungssatz, monate)
         writer.writerow(fields)
         writer.writerows(rows)
 
-def calc_annuity_monthly_graph(darlehenssumme, zinssatz, tilgungssatz, monate):
 
-    # Listen für return
-    fields = ["zinsen", "tilgung"]
-    rows = []
-
-    # Ermittlung Restschuld  >> Zinsen auf Restschuld >> neue Tilgung >> ..
-    i = 1
-    while i < int(monate) + 1:
-        if i == 1:
-            rate_tilgung_mtl = round((darlehenssumme * tilgungssatz)/12, 2)
-            rate_zinsen_mtl = round((darlehenssumme * zinssatz)/12, 2)
-            rate_gesamt_mtl =  rate_tilgung_mtl + rate_zinsen_mtl
-            rows_1 = [rate_zinsen_mtl, rate_tilgung_mtl]
-            rows.append(rows_1)
-            i += 1
-            continue
-
-        darlehenssumme = darlehenssumme - rate_tilgung_mtl
-        rate_zinsen_mtl = round((darlehenssumme * zinssatz)/12, 2)
-        rate_tilgung_mtl = round(rate_gesamt_mtl - rate_zinsen_mtl, 2)
-        if rate_gesamt_mtl != rate_zinsen_mtl + rate_tilgung_mtl:
-            break
-        rows_1 = []
-        rows_1 = [rate_zinsen_mtl, rate_tilgung_mtl]
-        rows.append(rows_1)
-        i += 1
-    
-    # Export .csv
-    with open('graph.csv', 'w') as f:
-        writer = csv.writer(f)
-        writer.writerow(fields)
-        writer.writerows(rows)
-
-# Ausführung
-darlehen_sum = 311000
-zins_percent = 0.0183
-tilgung_percent = 0.03
-
-calc_annuity_monthly_tableau(darlehen_sum, zins_percent, tilgung_percent, monate=360)
-calc_annuity_monthly_graph(darlehen_sum, zins_percent, tilgung_percent, monate=360)
+loan_amount = 311000
+interest = 0.0183
+repayment = 0.03
+months = 360
+calc_annuity_monthly_tableau(loan_amount, interest, repayment, months)
 
 
 
